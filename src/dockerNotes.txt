@@ -1,0 +1,29 @@
+Docker is a containerization tool
+A container is similar to a virtual machine, in that it is a virtualized environment
+But, where a virtual machine simulates an operating system's entire hardware,
+we can say that a container only virtualized software, because it's able to reuse the computer's
+core operating system functions like memory management
+
+Docker does quite a lot.. similarly to github or maven, it also maintains remote and local
+repositories of something called an image : an image is a blueprint for a container
+
+(we can even prove instructions for how an image should be made using something
+called a dockerfile - we'll get into this in a couple weeks)
+
+
+
+docker pull - pulls an image from dockerhub
+docker run - create and run container (will pull automatically)
+docker start - start stopped container
+docker kill - kill container
+docker container rm - remove stopped container
+
+-p - designate ports
+-d - run in background
+-e - set an environment variable for the container
+--name - set the name for the container
+
+#RUN THIS!
+docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=P@SSWORD123" -p 1433:1433 --name sql1 mcr.microsoft.com/mssql/server:2019-latest
+
+database IDE: DBeaver
