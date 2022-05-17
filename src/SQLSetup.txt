@@ -1,0 +1,58 @@
+Groceries
+Food name	List of supermarkets	List of prices of each supermarket	Food type	If I can eat this food type
+Banana	Aldi, Whole Foods, Publix	69c, 79c, 89c	Fruit	TRUE
+Beef	Aldi, Whole Foods, Publix	5.99, 8.99, 6.99	Meat	FALSE
+Bacon	Aldi, Whole Foods, Publix	5.99, 7.99, 6.99	Meat	FALSE
+
+If I want to update my diet preference for Meat, then I need to search through *all my data* and update *every single row*
+If I want to update my supermarkets or prices, then again I need to search through *all my data* and iterate through a list within a row
+
+Groceries					Food type
+Food ID	Food name	Food type ID (Foreign key references FoodType.TypeID)			Type ID (Primary Key)	Type name	Can eat
+1	Banana	0	Fruit	TRUE	0	Fruit	TRUE
+2	Beef	1	Meat	TRUE	1	Meat	TRUE
+3	Bacon	1	Meat	TRUE
+		SELECT * FROM (GROCERIES INNER JOIN FOOD TYPE ON GROCERIES.FOODTYPEID = FOODTYPE.FOODTYPEID) WHERE TYPENAME = MEAT
+Let's make Groceries related to Food type
+Interesting relation already: it makes sense, and is even more efficient performance wise, to have unique values that identify each row in our food types
+It also makes sense to tie the existence of a row to the unique identifier in another table (Groceries are tied to Food Type)
+These relationships are mediated by primary keys (unique identifiers of a row) and foreign keys (which reference a primary key in another table)
+This is also called multiplicity: this example thus far has been one-to-many multiplicity (A food type may have many foods)
+There's also many-to-many multiplicty and one-to-one multiplicty
+
+Supermarket			Availability (pkey is supermarketID, groceryID)
+ID (primary key)			SupermarketID	GroceryID	Price
+1	Aldi		1	1	69c
+2	Whole Foods		2	1	4.99
+3	Publix		3	1	4.99
+			1	2	4.99
+			2	2	4.99
+			3	2	4.99
+			1	3	4.99
+			2	3	4.99
+			3	3	7.99
+
+
+
+
+
+How do we perform operations?
+SELECT * FROM GROCERIES
+* is a stand-in for 'all columns' - usually this is what we will want anyways - we're going to be using sql primarily to transform table rows into java objects, so we need all columns
+what else?
+UPDATE TABLE AVAILABILITY Price = 9.99 where SupermarketID = 2 AND GroceryID = 2
+INSERT
+DELETE
+
+How do we do something like select from multiple tables? Let's say we want to find a list of all groceries sold at Aldi?
+When we had just 1 giant table, this was very easy: just grab the column that represented this list
+JOIN - we need to specify the condition that must be met when we join rows from different tables
+
+This process of splitting up our clunky huge grocery table into 4 different tables is known as normalization
+normalization is all about reducing data redundancy while maintaining all related data
+The less redundancy we have, the more efficient and error-free our database would be
+There are 'normal forms' - we're concerned about 1nf, 2nf, 3nf
+
+1nf - our data is 'atomic' - we don't have lists as columns, and we also contain a primary key (we split up the supermarket from the grocery table so that we no longer have that list)
+2nf - all data in the table is dependent on a single primary key - the primary key is made up of a single column
+3nf - there are no transitory dependencies (like how canEat is related to food type, but is only related to the grocery itself in a transitory way, better to separate canEat into its own table with foodType)

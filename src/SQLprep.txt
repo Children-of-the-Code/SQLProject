@@ -1,0 +1,35 @@
+For now, I want us to think of databases in relation to regular text files
+It's like storing data in Microsoft Excel instead of Microsoft Word
+
+SQL:
+
+1. Store large amounts of data
+2. Easier to access said data
+3. More efficient than using a TXT file (they are actually stored on a tree)
+4. SQL is what we call a 'relational database' - a table in SQL can be related to another table
+    a. We can join multiple tables in a query when we need data from both tables
+5. TCL and ACID compliance - it largely has to do with how multiple separate operations on our data interact with each
+    other in such a way that operations are predictable, consistent, and correct
+
+SuperGroceryList will need to do the following things:
+
+Store groceries
+Store recipies
+    Many recipies can have many groceries
+Store supermarkets
+    Many store can have many groceries
+    Groceries can have different prices at different supermarkets
+Store food types
+    A grocery can only have a single food type
+    We want to make sure to be able to avoid diet preferences (eg we want to keep track of nuts, fish, meat, dairy, etc)
+    We need to keep track of if I can eat a certain food type
+
+GROCERIES
+Grocery name
+List of supermarkets sold at
+List of prices at each supermarket
+Food type
+If we can eat a food type
+
+One of our big goals with relationtional databases is reducing redundancy
+    For example: the colum
